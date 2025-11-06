@@ -116,22 +116,6 @@
 
   <script>
     const base_url = "<?php echo BASE_URL; ?>";
-
-    async function cerrar_sesion() {
-      try {
-        let respuesta = await fetch(base_url + 'src/controller/login.php?tipo=cerrar_sesion', {
-          method: 'POST',
-          mode: 'cors',
-          cache: 'no-cache',
-        });
-        let json = await respuesta.json();
-        if (json.status) {
-          location.replace(base_url + 'login');
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }
   </script>
 </head>
 
