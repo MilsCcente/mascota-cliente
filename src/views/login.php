@@ -3,149 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login Panel Admin</title>
+  <title>Acceso al Panel</title>
+
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Iconos -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #c084fc, #a78bfa, #7c3aed);
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .login-container {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      width: 350px;
-      text-align: center;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    .login-container img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-      border: 3px solid #c4b5fd;
-      box-shadow: 0 0 8px rgba(124, 58, 237, 0.5);
-    }
-
-    .login-container h2 {
-      color: #6d28d9;
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.2rem;
-      text-align: left;
-    }
-
-    .form-group label {
-      display: block;
-      color: #6d28d9;
-      font-weight: bold;
-      margin-bottom: 0.3rem;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 0.8rem;
-      border: 1px solid #c4b5fd;
-      border-radius: 8px;
-      outline: none;
-      transition: border 0.3s;
-    }
-
-    .form-group input:focus {
-      border: 1px solid #7c3aed;
-      box-shadow: 0 0 5px rgba(124, 58, 237, 0.5);
-    }
-
-    .btn-login {
-      width: 100%;
-      background: #7c3aed;
-      color: white;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .btn-login:hover {
-      background: #6d28d9;
-    }
-
-    .extra {
-      margin-top: 1rem;
-      font-size: 0.9rem;
-    }
-
-    .extra a {
-      color: #7c3aed;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .extra a:hover {
-      text-decoration: underline;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-
-  <!-- Sweet Alerts css -->
+  <!-- SweetAlert -->
   <link href="<?php echo BASE_URL ?>src/views/pp/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
   <script>
     const base_url = '<?php echo BASE_URL; ?>';
     const base_url_server = '<?php echo BASE_URL_SERVER; ?>';
   </script>
+
+  <style>
+    /* Fondo degradado con ondas lilas */
+    body {
+      height: 100vh;
+      background: radial-gradient(circle at top left, #d8b4fe, #b197fc, #a78bfa);
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Ondas animadas en el fondo */
+    .wave {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: 0;
+      left: -50%;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15), transparent 70%);
+      animation: moveWave 6s infinite linear;
+      z-index: 0;
+    }
+
+    @keyframes moveWave {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Tarjeta de login con efecto glass */
+    .login-glass {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 380px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      padding: 2rem;
+      color: white;
+    }
+
+    /* Encabezado */
+    .login-glass h2 {
+      text-align: center;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    /* Ícono superior */
+    .icon-container {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .icon-container i {
+      font-size: 4rem;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255,255,255,0.6);
+    }
+
+    /* Inputs */
+    .form-control {
+      background-color: rgba(255,255,255,0.2);
+      border: none;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 15px;
+    }
+
+    .form-control:focus {
+      background-color: rgba(255,255,255,0.3);
+      box-shadow: 0 0 5px rgba(255,255,255,0.5);
+      color: #fff;
+    }
+
+    ::placeholder {
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* Botón */
+    .btn-lila {
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      border: none;
+      color: white;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 10px;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+    }
+
+    .btn-lila:hover {
+      background: linear-gradient(135deg, #7c3aed, #6d28d9);
+      transform: scale(1.03);
+    }
+
+    /* Pie de página */
+    .login-glass p {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 1.5rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    @media (max-width: 480px) {
+      .login-glass {
+        margin: 0 1rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <div class="wave"></div>
 
-  <div class="login-container">
-    
+  <div class="login-glass">
+    <div class="icon-container">
+      <i class="fa-solid fa-shield-halved"></i>
+    </div>
+    <h2>Acceso al Panel</h2>
 
-
-    <h2>Panel de Administración</h2>
-    <form action="" id="frmIniciar" method="POST">
-      <div class="form-group">
-
-      <img src="src/img/logo.png" alt="Logo" >
-
-        <label for="usuario">Usuario</label>
-        <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required>
+    <form id="frmIniciar">
+      <div class="mb-3">
+        <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" required>
       </div>
-
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+      <div class="mb-3">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
       </div>
-
-      <button type="submit" class="btn-login">Iniciar Sesión</button>
-
-      <div class="extra">
-        <p><a href="#">¿Olvidaste tu contraseña?</a></p>
+      <div class="d-grid">
+        <button type="submit" class="btn btn-lila">Entrar</button>
       </div>
     </form>
-    <p class="text-center mt-3 text-muted">&copy; 2025 Panel Admin</p>
   </div>
-  
+
+  <!-- Scripts -->
   <script src="<?php echo BASE_URL; ?>src/views/js/funtions_login.js"></script>
-  <!-- Sweet Alerts Js-->
   <script src="<?php echo BASE_URL ?>src/views/pp/plugins/sweetalert2/sweetalert2.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

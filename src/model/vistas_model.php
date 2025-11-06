@@ -5,13 +5,14 @@ class vistaModelo
     
     protected static function obtener_vista($vista)
     {
-        $palabras_permitidas = ['inicio','mascotas','nueva-mascota','editar-mascota','usuario','nuevo-usuario','editar-usuario', 'clientes', 'editar-cliente', 'nuevo-cliente', 'token', 'editar-token', 'nuevo-token' ];
+        $palabras_permitidas = ['inicio','peliculas','nueva-peli','editar-pelicula','usuario','nuevo-usuario','editar-usuario','cliente','nuevo-cliente','editar-cliente','token','nuevo-token','editar-token'];
 
     if (!isset($_SESSION['sesion_ventas_id'])) {
         return "login";
     }
     
         if (in_array($vista, $palabras_permitidas)) {
+
             if (is_file("./src/views/".$vista.".php")) {
                 $contenido = "./src/views/".$vista.".php";  
             } else {
