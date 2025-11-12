@@ -125,6 +125,8 @@
     <div class="brand">
       <i class="bi bi-flower1"></i>
       <span>Panel Administrativo</span>
+
+      <a href="<?php echo BASE_URL;?>api-request">Consumo Api</a>
     </div>
 
    
