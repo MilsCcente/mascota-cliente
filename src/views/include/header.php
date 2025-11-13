@@ -21,7 +21,7 @@
       flex-direction: column;
     }
 
-    /* Topbar con degradado lila */
+    /* 🔹 Topbar con degradado lila */
     .topbar {
       background: linear-gradient(90deg, #a855f7, #c084fc);
       color: white;
@@ -46,39 +46,33 @@
       font-size: 1.5rem;
     }
 
-    .profile {
+    /* 🔹 Contenedor de botones */
+    .topbar-buttons {
       display: flex;
-      align-items: center;
       gap: 10px;
-      background: rgba(255,255,255,0.2);
-      padding: 6px 12px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
+      align-items: center;
     }
 
-    .profile-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid white;
-    }
-
-    .username {
+    /* 🔹 Botón personalizado (degradado, redondeado) */
+    .btn-topbar {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: white;
+      color: #7e22ce;
       font-weight: 600;
+      border: none;
+      border-radius: 25px;
+      padding: 8px 16px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    .user-role {
-      font-size: 0.8rem;
-      opacity: 0.9;
-    }
-
-    /* Contenido principal */
-    main {
-      flex: 1;
-      padding: 2rem;
-      text-align: center;
-      color: #333;
+    .btn-topbar:hover {
+      background: #7e22ce;
+      color: white;
+      transform: translateY(-2px);
     }
 
     .card-custom {
@@ -109,31 +103,69 @@
       background: #9333ea;
       color: #fff;
     }
+     /* 🔴 Botón de cerrar sesión */
+     .btn-logout {
+      background: #ef4444;
+      color: white;
+    }
 
-  
+    .btn-logout:hover {
+      background: #dc2626;
+      color: white;
+    }
 
   </style>
 
   <script>
     const base_url = "<?php echo BASE_URL; ?>";
+
+   // Cerrar sesión
+   async function cerrar_sesion() {
+      try {
+        let respuesta = await fetch(base_url + 'src/controller/login.php?tipo=cerrar_sesion', {
+          method: 'POST',
+          mode: 'cors',
+          cache: 'no-cache',
+        });
+        let json = await respuesta.json();
+        if (json.status) {
+          location.replace(base_url + 'login');
+        } else {
+          alert("No se pudo cerrar sesión correctamente.");
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
   </script>
+  
 </head>
 
 <body>
-  <!-- Barra superior -->
+  <!-- 🌸 Barra superior -->
   <div class="topbar">
     <div class="brand">
       <i class="bi bi-flower1"></i>
       <span>Panel Administrativo</span>
-
-      <a href="<?php echo BASE_URL;?>api-request">Consumo Api</a>
     </div>
 
-   
+    <!-- 🔹 Botones en la parte derecha -->
+    <div class="topbar-buttons">
+      <a href="<?php echo BASE_URL;?>api-request" class="btn-topbar">
+        <i class="bi bi-cloud-arrow-down"></i> Consumo API
+      </a>
+
+      <a href="<?php echo BASE_URL;?>inicio" class="btn-topbar">
+        <i class="bi bi-arrow-left-circle"></i> Regresar
+      </a>
+      <button class="btn-topbar btn-logout" onclick="cerrar_sesion()">
+        <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+      </button>
+    </div>
   </div>
 
+  <!-- 🧠 Contenido principal -->
+  <main class="content py-4">
+    
 
 
-      <!-- Contenido principal -->
-      <div class="content py-4">
-        

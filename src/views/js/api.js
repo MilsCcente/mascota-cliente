@@ -1,15 +1,43 @@
-// ✅ Función para mostrar alertas con SweetAlert2
+// ✅ Mostrar mensaje con borde de color
 function mostrarAlerta(titulo, mensaje, tipo = "info") {
-    Swal.fire({
-        title: titulo,
-        text: mensaje,
-        icon: tipo,
-        confirmButtonColor: "#a77af5",
-        confirmButtonText: "Aceptar"
-    });
+    const divMensaje = document.getElementById("mensaje");
+
+    let colorBorde = "#ccc";
+    let colorFondo = "#f9f9f9";
+    let colorTexto = "#000";
+
+    if (tipo === "success") {
+        colorBorde = "#28a745";
+        colorFondo = "#d4edda";
+        colorTexto = "#155724";
+    } else if (tipo === "error") {
+        colorBorde = "#dc3545";
+        colorFondo = "#f8d7da";
+        colorTexto = "#721c24";
+    } else if (tipo === "warning") {
+        colorBorde = "#ffc107";
+        colorFondo = "#fff3cd";
+        colorTexto = "#856404";
+    } else if (tipo === "info") {
+        colorBorde = "#17a2b8";
+        colorFondo = "#d1ecf1";
+        colorTexto = "#0c5460";
+    }
+
+    divMensaje.innerHTML = `
+        <div style="
+            border: 2px solid ${colorBorde};
+            background-color: ${colorFondo};
+            color: ${colorTexto};
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+        ">
+            <strong>${titulo}:</strong> ${mensaje}
+        </div>
+    `;
 }
 
-// ✅ Cargar token desde el controlador PHP
 async function cargarToken() {
     try {
         const respuesta = await fetch('src/controller/token.php?tipo=ver');
@@ -25,7 +53,6 @@ async function cargarToken() {
     }
 }
 
-// ✅ Llamar API de perritos
 async function llamar_api() {
     const formulario = document.getElementById('frmApi');
     const datos = new FormData(formulario);
@@ -43,13 +70,11 @@ async function llamar_api() {
         const json = await respuesta.json();
         console.log("Respuesta API:", json);
 
-        // 🟢 Si el servidor devuelve 'msg', mostrarlo
         if (json.msg && json.msg.trim() !== "") {
             const tipo = json.status ? "success" : "error";
             mostrarAlerta("Mensaje del servidor", json.msg, tipo);
         }
 
-        // 🐕 Si hay perritos en el contenido, se muestran
         if (json.status && json.contenido && json.contenido.length > 0) {
             let contador = 0;
             json.contenido.forEach(perrito => {
@@ -66,10 +91,8 @@ async function llamar_api() {
                         <td>${perrito.vacunado}</td>
                     </tr>`;
             });
-        } 
-        // 🟠 Si no hay resultados
-        else if (!json.status && (!json.contenido || json.contenido.length === 0)) {
-            contenido.innerHTML = `<tr><td colspan="8">${json.msg || '🐾 No se encontraron perritos.'}</td></tr>`;
+        } else if (!json.status && (!json.contenido || json.contenido.length === 0)) {
+            contenido.innerHTML = `<tr><td colspan="8">🐾 No se encontraron perritos.</td></tr>`;
         }
 
     } catch (error) {
@@ -79,5 +102,4 @@ async function llamar_api() {
     }
 }
 
-// 🔹 Cargar token automáticamente al iniciar la página
 document.addEventListener("DOMContentLoaded", cargarToken);

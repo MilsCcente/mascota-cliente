@@ -6,14 +6,12 @@
     <title>🐾 Buscador de Perritos</title>
 
     <style>
-        /* 💜 Fondo con degradado lila-violeta */
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #d8b4f8, #b388eb, #9d7be0);
             color: #4a3b5a;
           
         }
-
 
         @keyframes aparecer {
             from {opacity: 0; transform: translateY(20px);}
@@ -157,14 +155,10 @@
 <body>
     <div class="container">
         <h1>🐶✨ Buscador de Perritos</h1>
-
-
             <input type="text" id="ruta_api" value="http://localhost:8888/mascotas/src/controller/api-request.php?tipo=verPerritosApiByNombre" hidden>
-        
-
-        <!-- Formulariomascotas agregadas en mi tabla -->
+    
         <form id="frmApi">
-             <!-- Token cargado dinámicamente -->
+       
       <input type="hidden" name="token" id="token">
 
 
@@ -206,6 +200,9 @@
             <button type="button" onclick="llamar_api()">🐕 Buscar Perritos</button>
         </form>
 
+           <!-- 🔔 Aquí se mostrará el mensaje -->
+    <div id="mensaje" style="margin-top:15px;"></div>
+
         <table>
             <thead>
                 <tr>
@@ -220,13 +217,13 @@
                 </tr>
             </thead>
             <tbody id="contenido">
-                <!-- Aquí se mostrarán los perritos -->
+
             </tbody>
         </table>
 
         <footer>🐾 Hecho con amor para los perritos 💜</footer>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="<?php echo BASE_URL; ?>src/views/js/api.js"></script>
 </body>
 </html>
