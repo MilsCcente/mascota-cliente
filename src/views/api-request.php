@@ -155,11 +155,11 @@
 <body>
     <div class="container">
         <h1>🐶✨ Buscador de Perritos</h1>
-            <input type="text" id="ruta_api" value="http://localhost:8888/mascotas/src/controller/api-request.php?tipo=verPerritosApiByNombre" hidden>
+            <input type="text" id="ruta_api" value="https://milu-mascotas.estudiojuridico.com.pe/src/controller/api-request.php?tipo=verPerritosApiByNombre" hidden>
     
         <form id="frmApi">
        
-      <input type="hidden" name="token" id="token">
+      <input type="hidden" name="token" id="token" >
 
 
             <label for="data">🔍 Buscar perrito:</label>
